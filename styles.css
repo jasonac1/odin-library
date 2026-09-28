@@ -19,6 +19,13 @@
 
     --light-text-color: var(--main-bg-color);
     --dark-text-color: black;
+
+    --primary-100-color: #8891ff;
+    --primary-200-color: #5561ff;
+    --error-100-color: #f9928a;
+    --error-200-color: #f66358;
+    --neutral-100-color: #a3b4bc;
+    --neutral-200-color: #7b939f;
 }
 
 /* project styles */
@@ -152,8 +159,50 @@ main {
 }
 
 .book {
+    /* layout styles */
     border: 2px solid black;
     flex-basis: calc(100% / 3 - 2rem);
     height: 100%;
     padding: 2rem;
+
+    /* individual styles */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+
+    font-size: 1.5rem;
+
+    .actions {
+        display: flex;
+        gap: 2rem;
+        
+        svg {
+            width: 4rem;
+        }
+
+        .check {
+            fill: var(--neutral-100-color);
+
+            &:hover {
+                fill: var(--neutral-200-color)
+            }
+        }
+
+        .view {
+            fill: var(--primary-100-color);
+
+            &:hover {
+                fill: var(--primary-200-color);
+            }
+        }
+
+        .delete {
+            fill: var(--error-100-color);
+
+            &:hover {
+                fill: var(--error-200-color);
+            }
+        }
+    }
 }
