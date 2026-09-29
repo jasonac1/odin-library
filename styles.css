@@ -11,6 +11,10 @@
   margin: 0;
 }
 
+input, button, textarea, select {
+  font: inherit;
+}
+
 /* project properties */
 :root {
     --header-bg-color: var(--main-bg-color);
@@ -31,6 +35,10 @@
 /* project styles */
 body {
     font-family: "Roboto", sans-serif;
+
+    button {
+        font-weight: bold;
+    }
 }
 
 .layout {
@@ -148,6 +156,63 @@ main {
 
     padding: 2rem 4rem;
 }
+
+.top-container {
+    display: flex;
+    justify-content: space-between;
+
+    button {
+        background-color: var(--primary-200-color);
+        color: var(--main-bg-color);
+        
+        cursor: pointer;
+
+        border: none;
+        padding: 0 2rem;
+    }
+}
+
+dialog:open {
+    border: none;
+    font-size: 1.5rem;
+    padding: 3rem;
+
+    form {
+        display: flex;
+        flex-direction: column;
+        row-gap: 1rem;
+    }
+
+    .form-control {
+        display: flex;
+        flex-direction: column;
+    }
+
+    input {
+        height: 3rem;
+        text-indent: 0.5rem;
+    }
+    
+    .form-actions {
+        display: flex;
+        gap: 0.5rem;
+    }
+    
+    button {
+        color: var(--main-bg-color);
+        border: none;
+        padding: 0.5rem 1rem;
+    }
+
+    .cancel {
+        background-color: var(--neutral-200-color);
+    }
+
+    #new-book-add {
+        background-color: var(--primary-200-color);
+    }
+}
+
 
 .book-container {
     display: flex;

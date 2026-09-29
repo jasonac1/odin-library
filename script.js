@@ -1,19 +1,21 @@
 const myLibrary = [];
 
 const dom = {
-    bookContainer: document.getElementsByClassName("book-container")[0]
+    bookContainer: document.getElementsByClassName("book-container")[0],
+    newBookFormDialog: document.querySelector("#new-book-form-dialog"),
+    newBookForm: document.querySelector("#new-book-form"),
 }
 
-function Book(title, author, publisher, date) {
+function Book(title, author, publisher, year) {
     this.id = crypto.randomUUID();
     this.title = title;
     this.author = author;
     this.publisher = publisher;
-    this.date = date;
+    this.year = year;
 }
 
-function addBookToLibrary(title, author, publisher, date) {
-    let newBook = new Book(title, author, publisher, date);
+function addBookToLibrary(book) {
+    let newBook = new Book(book.title, book.author, book.publisher, book.year);
     myLibrary.push(newBook);
 }
 
@@ -52,9 +54,30 @@ function clearDisplayLibrary() {
     }
 }
 
-addBookToLibrary("Pride and Prejudice", "Jane Austen", "Self", 1813);
-addBookToLibrary("Moby Dick", "Herman Melville", "Self", 1851);
-addBookToLibrary("War and Peace", "Leo Tolstoy", "Self", 1867);
+function updateDisplayLibrary() {
+    clearDisplayLibrary();
+    displayLibrary();
+}
 
-displayBooks();
-// clearBooks();
+dom.newBookForm.addEventListener("click", (e) => {
+    if(e.target.value === "cancel") {
+        dom.newBookFormDialog.close();
+    }
+});
+
+dom.newBookForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const formElement = e.target;
+    const formData = new FormData(formElement);
+    const bookData = {};
+    for(let entry of formData.entries()) {
+        bookData[entry[0]] = entry[1];
+    }
+
+    addBookToLibrary(bookData);
+    updateDisplayLibrary();
+    
+    dom.newBookFormDialog.close();
+});
+
+displayLibrary();
