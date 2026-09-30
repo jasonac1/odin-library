@@ -4,6 +4,7 @@ const dom = {
     bookContainer: document.getElementsByClassName("book-container")[0],
     newBookFormDialog: document.querySelector("#new-book-form-dialog"),
     newBookForm: document.querySelector("#new-book-form"),
+    viewBookDialog: document.querySelector("#view-book-dialog"),
 }
 
 function Book(title, author, publisher, year) {
@@ -32,7 +33,7 @@ function displayLibrary() {
 
         const svgCode = `
         <svg class="check" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>check-bold</title><path d="M9,20.42L2.79,14.21L5.62,11.38L9,14.77L18.88,4.88L21.71,7.71L9,20.42Z" /></svg>
-        <svg class="view" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>eye</title><path d="M12,9A3,3 0 0,0 9,12A3,3 0 0,0 12,15A3,3 0 0,0 15,12A3,3 0 0,0 12,9M12,17A5,5 0 0,1 7,12A5,5 0 0,1 12,7A5,5 0 0,1 17,12A5,5 0 0,1 12,17M12,4.5C7,4.5 2.73,7.61 1,12C2.73,16.39 7,19.5 12,19.5C17,19.5 21.27,16.39 23,12C21.27,7.61 17,4.5 12,4.5Z" /></svg>
+        <svg class="view" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24""><title>eye</title><path d="M12,9A3,3 0 0,0 9,12A3,3 0 0,0 12,15A3,3 0 0,0 15,12A3,3 0 0,0 12,9M12,17A5,5 0 0,1 7,12A5,5 0 0,1 12,7A5,5 0 0,1 17,12A5,5 0 0,1 12,17M12,4.5C7,4.5 2.73,7.61 1,12C2.73,16.39 7,19.5 12,19.5C17,19.5 21.27,16.39 23,12C21.27,7.61 17,4.5 12,4.5Z" /></svg>
         <svg class="delete" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>delete</title><path d="M19,4H15.5L14.5,3H9.5L8.5,4H5V6H19M6,19A2,2 0 0,0 8,21H16A2,2 0 0,0 18,19V7H6V19Z" /></svg>
         `;
         bookActionsElement.innerHTML = svgCode;
@@ -43,6 +44,8 @@ function displayLibrary() {
         bookElement.appendChild(bookTitleElement);
         bookElement.appendChild(bookActionsElement);
         bookElement.appendChild(bookAuthorElement);
+
+        bookElement.dataset.id = book.id;
 
         dom.bookContainer.appendChild(bookElement);
     }
@@ -79,5 +82,29 @@ dom.newBookForm.addEventListener("submit", (e) => {
     
     dom.newBookFormDialog.close();
 });
+
+dom.bookContainer.addEventListener("click", function viewBookDetails(e) {
+    const clickedSVG = e.target.closest("svg");
+    const viewedBook = e.target.closest(".book");
+    if(clickedSVG.matches(".view")) {
+        dom.viewBookDialog.showModal();
+
+        for(const book of myLibrary) {
+            if(viewedBook.dataset.id === book.id) {
+                for(const key of Object.keys(book)) {
+                    let bookDetailField = document.querySelector(`.book-detail-${key}`);
+                    bookDetailField.textContent = `${book[key]}`;
+                }
+                break;
+            }
+        }
+    }
+});
+
+dom.viewBookDialog.addEventListener("click", (e) => {
+    if(e.target.matches(".close")) {
+        dom.viewBookDialog.close();
+    }
+})
 
 displayLibrary();

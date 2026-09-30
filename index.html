@@ -62,13 +62,39 @@
             </div>
             <div class="form-control">
                 <label for="date">Year*</label>
-                <input type="number" name="date" id="date" required>
+                <input type="number" name="year" id="year" required>
             </div>
             <div class="form-actions">
                 <button class="cancel" value="cancel" type="button" formmethod="dialog" formnovalidate>Cancel</button>
                 <button id="new-book-add" value="add">Add</button>
             </div>
         </form>
+    </dialog>
+    <dialog id="view-book-dialog">
+        <h2>Book Details</h2>
+        <div class="book-details">
+            <div class="book-detail">
+                <h3>ID</h3>
+                <p class="book-detail-id"></p>
+            </div>
+            <div class="book-detail">
+                <h3>Title</h3>
+                <p class="book-detail-title"></p>
+            </div>
+            <div class="book-detail">
+                <h3>Author</h3>
+                <p class="book-detail-author"></p>
+            </div>
+            <div class="book-detail">
+                <h3>Publisher</h3>
+                <p class="book-detail-publisher"></p>
+            </div>
+            <div class="book-detail">
+                <h3>Year</h3>
+                <p class="book-detail-year"></p>
+            </div>
+        </div>
+        <button class="close">Close</button>
     </dialog>
 </body>
 </html>

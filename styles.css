@@ -26,6 +26,7 @@ input, button, textarea, select {
 
     --primary-100-color: #8891ff;
     --primary-200-color: #5561ff;
+    --primary-300-color: #3241ff;
     --error-100-color: #f9928a;
     --error-200-color: #f66358;
     --neutral-100-color: #a3b4bc;
@@ -177,39 +178,62 @@ dialog:open {
     font-size: 1.5rem;
     padding: 3rem;
 
-    form {
-        display: flex;
-        flex-direction: column;
-        row-gap: 1rem;
-    }
-
-    .form-control {
-        display: flex;
-        flex-direction: column;
-    }
-
-    input {
-        height: 3rem;
-        text-indent: 0.5rem;
-    }
-    
-    .form-actions {
-        display: flex;
-        gap: 0.5rem;
-    }
-    
     button {
         color: var(--main-bg-color);
         border: none;
         padding: 0.5rem 1rem;
     }
 
-    .cancel {
-        background-color: var(--neutral-200-color);
+    &#new-book-form-dialog {
+        form {
+            display: flex;
+            flex-direction: column;
+            row-gap: 1rem;
+        }
+
+        .form-control {
+            display: flex;
+            flex-direction: column;
+        }
+
+        input {
+            height: 3rem;
+            text-indent: 0.5rem;
+        }
+    
+        .form-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .cancel {
+            background-color: var(--neutral-200-color);
+        }
+    
+        #new-book-add {
+            background-color: var(--primary-200-color);
+        }
     }
 
-    #new-book-add {
-        background-color: var(--primary-200-color);
+    &#view-book-dialog {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+        
+        .book-details {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            line-height: 1.5; 
+        }
+
+        h3 {
+            font-size: 1.5rem;
+        }
+
+        .close {
+            background-color: var(--neutral-200-color);
+        }
     }
 }
 
@@ -258,6 +282,10 @@ dialog:open {
 
             &:hover {
                 fill: var(--primary-200-color);
+            }
+
+            &:active {
+                fill: var(--primary-300-color);
             }
         }
 
