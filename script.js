@@ -90,6 +90,7 @@ dom.newBookForm.addEventListener("submit", (e) => {
     addBookToLibrary(bookData);
     updateDisplayLibrary();
     
+    formElement.reset();
     dom.newBookFormDialog.close();
 });
 
