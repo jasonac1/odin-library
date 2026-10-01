@@ -27,11 +27,14 @@ input, button, textarea, select {
     --primary-100-color: #8891ff;
     --primary-200-color: #5561ff;
     --primary-300-color: #3241ff;
+    --success-200-color: #6abd6e;
+    --success-300-color: #4caf50;
     --error-100-color: #f9928a;
     --error-200-color: #f66358;
     --error-300-color: #f44336;
     --neutral-100-color: #a3b4bc;
     --neutral-200-color: #7b939f;
+    --neutral-300-color: #607d8b;
 }
 
 /* project styles */
@@ -213,7 +216,7 @@ dialog:open {
             flex-direction: column;
         }
         
-        input {
+        input, select {
             height: 3rem;
             text-indent: 0.5rem;
         }
@@ -280,6 +283,18 @@ dialog:open {
 
             &:hover {
                 fill: var(--neutral-200-color)
+            }
+
+            &:active {
+                fill: var(--neutral-300-color);
+            }
+
+            &.read {
+                fill: var(--success-200-color);
+
+                &:active {
+                    fill: var(--success-300-color);
+                }
             }
         }
 

@@ -64,6 +64,13 @@
                 <label for="date">Year*</label>
                 <input type="number" name="year" id="year" required>
             </div>
+            <div class="form-control">
+                <label for="date">Status*</label>
+                <select name="read" id="read" required>
+                    <option value="unread">Unread</option>
+                    <option value="read">Read</option>
+                </select>
+            </div>
             <div class="form-actions">
                 <button class="cancel" value="cancel" type="button" formmethod="dialog" formnovalidate>Cancel</button>
                 <button id="new-book-add" value="add">Add</button>
@@ -92,6 +99,10 @@
             <div class="book-detail">
                 <h3>Year</h3>
                 <p class="book-detail-year"></p>
+            </div>
+            <div class="book-detail">
+                <h3>Status</h3>
+                <p class="book-detail-read"></p>
             </div>
         </div>
         <button class="close">Close</button>
