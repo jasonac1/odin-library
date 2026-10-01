@@ -5,6 +5,7 @@ const dom = {
     newBookFormDialog: document.querySelector("#new-book-form-dialog"),
     newBookForm: document.querySelector("#new-book-form"),
     viewBookDialog: document.querySelector("#view-book-dialog"),
+    deleteBookDialog: document.querySelector("#delete-book-dialog"),
 }
 
 function Book(title, author, publisher, year) {
@@ -83,9 +84,12 @@ dom.newBookForm.addEventListener("submit", (e) => {
     dom.newBookFormDialog.close();
 });
 
-dom.bookContainer.addEventListener("click", function viewBookDetails(e) {
+dom.bookContainer.addEventListener("click", function handleBookActions(e) {
     const clickedSVG = e.target.closest("svg");
     const viewedBook = e.target.closest(".book");
+
+    if(clickedSVG === null) return;
+
     if(clickedSVG.matches(".view")) {
         dom.viewBookDialog.showModal();
 
@@ -98,6 +102,9 @@ dom.bookContainer.addEventListener("click", function viewBookDetails(e) {
                 break;
             }
         }
+    } else if(clickedSVG.matches(".delete")) {
+        dom.deleteBookDialog.dataset.id = viewedBook.dataset.id;     
+        dom.deleteBookDialog.showModal();
     }
 });
 
@@ -105,6 +112,24 @@ dom.viewBookDialog.addEventListener("click", (e) => {
     if(e.target.matches(".close")) {
         dom.viewBookDialog.close();
     }
-})
+});
+
+dom.deleteBookDialog.addEventListener("click", (e) => {
+    if(e.target.matches(".cancel")) {
+        dom.deleteBookDialog.close();
+    }
+
+    else if(e.target.matches(".delete")) {
+        for(let i = 0; i < myLibrary.length; i++) {
+            if(dom.deleteBookDialog.dataset.id === myLibrary[i].id) {
+                myLibrary.splice(i, 1);
+                break;
+            }
+        }
+
+        updateDisplayLibrary();
+    }
+    dom.deleteBookDialog.close();
+});
 
 displayLibrary();
