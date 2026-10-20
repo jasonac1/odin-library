@@ -8,17 +8,19 @@ const dom = {
     deleteBookDialog: document.querySelector("#delete-book-dialog"),
 }
 
-function Book(title, author, publisher, year, read) {
-    this.id = crypto.randomUUID();
-    this.title = title;
-    this.author = author;
-    this.publisher = publisher;
-    this.year = year;
-    this.read = read;
-}
+class Book {
+    constructor(title, author, publisher, year, read) {
+        this.id = crypto.randomUUID();
+        this.title = title;
+        this.author = author;
+        this.publisher = publisher;
+        this.year = year;
+        this.read = read;
+    }
 
-Book.prototype.toggleRead = function() {
-    this.read = !this.read;    
+    toggleRead() {
+        this.read = !this.read;    
+    }
 }
 
 function addBookToLibrary(book) {
