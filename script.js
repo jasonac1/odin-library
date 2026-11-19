@@ -4,6 +4,7 @@ const dom = {
     bookContainer: document.getElementsByClassName("book-container")[0],
     newBookFormDialog: document.querySelector("#new-book-form-dialog"),
     newBookForm: document.querySelector("#new-book-form"),
+    newBookButton: document.querySelector("#new-book-add"),
     viewBookDialog: document.querySelector("#view-book-dialog"),
     deleteBookDialog: document.querySelector("#delete-book-dialog"),
 }
@@ -151,6 +152,34 @@ dom.deleteBookDialog.addEventListener("click", (e) => {
         updateDisplayLibrary();
     }
     dom.deleteBookDialog.close();
+});
+
+function validateBookFormElement(el) {
+    el.setCustomValidity("");
+    if(el.validity.valueMissing) {
+        el.setCustomValidity(`${el.id.charAt(0).toUpperCase() + el.id.slice(1)} field cannot be empty`);
+    }
+    
+    el.reportValidity();
+}
+
+const formElements = [
+    document.querySelector("#title"),
+    document.querySelector("#author"),
+    document.querySelector("#publisher"), 
+    document.querySelector("#year"),
+]
+
+formElements.forEach(element => {
+    element.addEventListener("input", (e) => {
+        validateBookFormElement(e.target);
+    });
+});
+
+dom.newBookButton.addEventListener("click", () => {
+    formElements.forEach(element => {
+        validateBookFormElement(element)
+    });   
 });
 
 displayLibrary();
